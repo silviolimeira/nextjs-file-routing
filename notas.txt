@@ -3,3 +3,6 @@ $ npm install
 
 $ npm run dev
 
+Source Public Images:
+https://unsplash.com/pt-br/s/fotografias/networking
+
