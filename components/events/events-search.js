@@ -13,6 +13,8 @@ function EventsSearch(props) {
 
     props.onSearch(selectedYear, selectedMonth);
   }
+
+  
   return (
     <form onSubmit={submitHandler} className={classes.form}>
       <div clasName={classes.controls}>

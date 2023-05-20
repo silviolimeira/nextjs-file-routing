@@ -12,7 +12,7 @@ function EventItem(props) {
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
   const humanReadableDate = new Date(date).toLocaleDateString("pt-BR", {
     day: "numeric",
-    monty: "long",
+    month: "long",
     year: "numeric",
   });
   const formatAddress = location.replace(",", "\n");
