@@ -13,7 +13,7 @@ function FilteredEventsPage(props) {
   const [loadedEvents, setEvents] = useState();
 
   const filterData = router.query.slug;
-  /*
+
   const fetcher = (...args) =>
     fetch(...args)
       .then((response) => {
@@ -28,17 +28,6 @@ function FilteredEventsPage(props) {
       });
 
   const { error } = useSWR("http://172.21.64.1:8080/events", fetcher);
-  */
-
-  const { data, error } = useSWR("http://172.21.64.1:8080/events");
-
-  useEffect(() => {
-    if (data) {
-      console.log("data:", data);
-    }
-  });
-
-  return <p className="center">Loading...</p>;
 
   if (!loadedEvents || !filterData) {
     return <p className="center">Loading...</p>;
@@ -57,6 +46,10 @@ function FilteredEventsPage(props) {
       eventDate.getMonth() === numMonth - 1
     );
   });
+
+  if (!filteredEvents || filteredEvents.length === 0) {
+    return <p className="center">No Events for this Date...</p>;
+  }
 
   return (
     <>
