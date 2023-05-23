@@ -6,6 +6,7 @@ import Button from "../../components/ui/button";
 import ErrorAlert from "../../components/ui/error-alert";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 function FilteredEventsPage(props) {
   const router = useRouter();
@@ -39,6 +40,16 @@ function FilteredEventsPage(props) {
   const numYear = +filteredYear;
   const numMonth = +filterMonth;
 
+  const pageHeadData = (
+    <Head>
+      <title>{`All Events for ${numMonth}/${numYear}.`}</title>
+      <meta
+        name="description"
+        content={`All Events for ${numMonth}/${numYear}.`}
+      />
+    </Head>
+  );
+
   const filteredEvents = loadedEvents.filter((event) => {
     const eventDate = new Date(event.eventDate);
     return (
@@ -52,10 +63,11 @@ function FilteredEventsPage(props) {
   }
 
   return (
-    <>
+    <div>
+      {pageHeadData}
       <ResultsTitle date={filteredEvents[0].eventDate} />
       <EventList items={filteredEvents} />
-    </>
+    </div>
   );
 }
 
