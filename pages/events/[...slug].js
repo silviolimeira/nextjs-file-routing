@@ -28,7 +28,8 @@ function FilteredEventsPage(props) {
         console.log(error);
       });
 
-  const { error } = useSWR("http://172.21.64.1:8080/events", fetcher);
+  //const { error } = useSWR("http://172.21.64.1:8080/events", fetcher);
+  const { error } = useSWR("http://localhost:3000/api/dummy-events", fetcher);
 
   if (!loadedEvents || !filterData) {
     return <p className="center">Loading...</p>;
