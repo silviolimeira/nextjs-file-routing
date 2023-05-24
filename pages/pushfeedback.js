@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-function FeedbackPage(props) {
+function PushFeedbackPage(props) {
   const [feedbackItems, setFeedbackItems] = useState([]);
 
   const emailInputRef = useRef();
@@ -56,4 +56,4 @@ function FeedbackPage(props) {
   );
 }
 
-export default FeedbackPage;
+export default PushFeedbackPage;
