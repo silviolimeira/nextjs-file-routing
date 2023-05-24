@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-function LoginPage(props) {
+function FeedbackPage(props) {
   const emailInputRef = useRef();
   const feedbackInputRef = useRef();
 
@@ -10,12 +10,12 @@ function LoginPage(props) {
     const enteredEmail = emailInputRef.current.value;
     const enteredFeedback = feedbackInputRef.current.value;
 
-    
+    fetch() // {email: 'test@test.com', text: 'Some feedback test' }
   }
 
   return (
     <div>
-      <h1>The Login Page</h1>
+      <h1>The Feedback Page</h1>
       <form onSubmit={submitFormHandler}>
         <div>
           <label htmlFor="email">Your Email Address</label>
@@ -31,4 +31,4 @@ function LoginPage(props) {
   );
 }
 
-export default LoginPage;
+export default FeedbackPage;
