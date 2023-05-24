@@ -1,8 +1,11 @@
+import { Console } from "console";
 import fs from "fs";
 import path from "path";
 
 function handler(req, res) {
+  console.log("req.method: ", req.method);
   if (req.method === "POST") {
+    console.log(" == POST ==");
     const email = req.body.email;
     const feedbackText = req.body.text;
 
@@ -14,8 +17,10 @@ function handler(req, res) {
 
     // store that int a database or in a tilte
     const filePath = path.join(process.cwd(), "data", "feedback.json");
-    const fileData = fs.writeFileSync(filePath);
+    const fileData = fs.readFileSync(filePath);
     const data = JSON.parse(fileData);
+    console.log("file DATA: ", data);
+    data.push(newFeedback);
     fs.writeFileSync(filePath, JSON.stringify(data));
     res.status(201).json({ message: "Success!", feedback: newFeedback });
   } else {

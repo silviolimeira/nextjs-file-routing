@@ -10,13 +10,23 @@ function FeedbackPage(props) {
     const enteredEmail = emailInputRef.current.value;
     const enteredFeedback = feedbackInputRef.current.value;
 
-    fetch() // {email: 'test@test.com', text: 'Some feedback test' }
+    const reqBody = { email: enteredEmail, text: enteredFeedback };
+    console.log("reqBody: ", reqBody);
+    fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify(reqBody),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   }
 
   return (
     <div>
       <h1>The Feedback Page</h1>
-      <form onSubmit={submitFormHandler}>
+      <form onSubmit={submitFormHandler} method="POST">
         <div>
           <label htmlFor="email">Your Email Address</label>
           <input type="email" id="email" ref={emailInputRef}></input>
