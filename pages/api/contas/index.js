@@ -5,8 +5,9 @@ let contas = [];
 async function dbInsertConta(conta) {
   const client = await MongoClient.connect("mongodb://localhost:27017/MyDB");
   const db = client.db();
-  await db.collection("contas").insertOne(conta);
+  const newConta = await db.collection("contas").insertOne(conta);
   client.close();
+  return newConta;
 }
 
 //http://172.21.64.1
@@ -24,13 +25,17 @@ async function dbFindAllContas() {
 
 function handler(req, res) {
   if (req.method === "POST") {
-    const { descricao, valor } = JSON.parse(req.body);
-    const conta = { descricao: descricao, valor: valor };
+    const { _id, descricao, valor } = JSON.parse(req.body);
+    const conta = { _id: _id, descricao: descricao, valor: valor };
     //contas.push(conta);
 
-    dbInsertConta(conta);
+    dbInsertConta(conta).then((newConta) => {
+      console.log("NEW CONTA: ", newConta);
+      conta._id = newConta.insertedId;
+      res.status(201).json({ message: "Conta Adicionada!", conta: conta });
+      return;
+    });
 
-    res.status(201).json({ message: "Conta Adicionada!" });
     return;
   }
   if (req.method === "GET") {

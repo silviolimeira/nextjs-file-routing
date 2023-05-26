@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import ContaForm from "./conta-form";
+import ListConta from "./list-conta";
 
 function ContasPage(props) {
   const [contas, setContas] = useState([]);
-
   useEffect(() => {
     fetch("/api/contas", {
       method: "GET",
@@ -29,7 +29,10 @@ function ContasPage(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        setContas(contas);
+        const clone = [...contas];
+        console.log("DATA: ", data.conta);
+        clone.push(data.conta);
+        setContas(clone);
       });
   }
 
@@ -37,17 +40,7 @@ function ContasPage(props) {
     <>
       <h1>Contas</h1>
       <ContaForm onSalvarConta={salvarContaHander} />
-      <ul>
-        {contas.map((conta) => (
-          <>
-            <li key={conta.name}>
-              <p>
-                Descrição: {conta.descricao} - Valor: {conta.valor}
-              </p>
-            </li>
-          </>
-        ))}
-      </ul>
+      <ListConta contas={contas} />
     </>
   );
 }
