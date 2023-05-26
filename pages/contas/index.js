@@ -30,7 +30,7 @@ function ContasPage(props) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setContas(contas);
+        //setContas(contas);
       });
   }
 
@@ -38,6 +38,13 @@ function ContasPage(props) {
     <>
       <h1>Contas</h1>
       <ContaForm onSalvarConta={salvarContaHander} />
+    </>
+  );
+}
+
+export default ContasPage;
+
+/*
       <ul>
         {contas.map((conta) => (
           <li key={conta.name}>
@@ -47,8 +54,4 @@ function ContasPage(props) {
           </li>
         ))}
       </ul>
-    </>
-  );
-}
-
-export default ContasPage;
+*/
