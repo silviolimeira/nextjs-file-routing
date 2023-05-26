@@ -10,14 +10,14 @@ function ContasPage(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("LOAD CONTAS 11: ", data);
-        setContas(data);
+        console.log("LOAD CONTAS 11: ", data.contas);
+        setContas(data.contas);
       });
   }, []);
 
   function salvarContaHander(conta) {
     console.log("CONTA: ", conta);
-    contas.push(conta);
+    //contas.push(conta);
     console.log("CONTAS 55: ", contas);
 
     fetch("/api/contas", {
@@ -29,8 +29,7 @@ function ContasPage(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        //setContas(contas);
+        setContas(contas);
       });
   }
 
@@ -38,6 +37,17 @@ function ContasPage(props) {
     <>
       <h1>Contas</h1>
       <ContaForm onSalvarConta={salvarContaHander} />
+      <ul>
+        {contas.map((conta) => (
+          <>
+            <li key={conta.name}>
+              <p>
+                Descrição: {conta.descricao} - Valor: {conta.valor}
+              </p>
+            </li>
+          </>
+        ))}
+      </ul>
     </>
   );
 }
