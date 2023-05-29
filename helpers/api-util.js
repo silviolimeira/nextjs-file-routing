@@ -1,3 +1,16 @@
+import { MongoClient } from "mongodb";
+
+export async function connectDatabase() {
+  const client = await MongoClient.connect("mongodb://localhost:27017/MyDB");
+  return client;
+}
+
+export async function insertDocument(client, document, collection) {
+  const db = client.db();
+  const newConta = await db.collection(collection).insertOne(document);
+  return newConta;
+}
+
 export async function getAllEvents() {
   //const response = await fetch("http://localhot:8080/events");
   // WSL
