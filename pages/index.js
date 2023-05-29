@@ -1,4 +1,3 @@
-import { getFilteredEvents } from "../helpers/api-util";
 import EventList from "../components/events/event-list";
 import { getFeaturedEvents } from "../helpers/api-util";
 import Head from "next/head";
